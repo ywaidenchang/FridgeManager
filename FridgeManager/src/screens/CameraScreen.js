@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import axios from 'axios';
 
 const CameraScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -17,7 +18,27 @@ const CameraScreen = () => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    console.log(data);
+    const keyId = '83f4fb11863a4176af34';
+    const serviceId = 'I2570';
+    const dataType = 'json';
+    const startIdx = 1;
+    const endIdx = 5;
+    const BAR_CD = String(data);
+    const url = `http://openapi.foodsafetykorea.go.kr/api/${keyId}/${serviceId}/${dataType}/${startIdx}/${endIdx}/BAR_CD=${BAR_CD}`;
+
+    axios.get(url)
+    .then(response => {
+      setName(response.data.C005.row[0].PRDLST_NM)
+      console.log(name);
+      setConDate(response.data.C005.row[0].PRDLST_DCNM);
+      console.log("소비기한: " + conDate);
+
+      navigator.navigate("Info", {name:name, conDate:conDate})
+    })
+    .catch(error => {
+      console.error('Error making the API request:', error);
+    });
   };
 
   if (hasPermission === null) {
