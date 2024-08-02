@@ -1,0 +1,2 @@
+# FridgeManager
+fridge managing system
