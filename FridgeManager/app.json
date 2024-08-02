@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "FridgeManager",
+    "slug": "FridgeManager",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-barcode-scanner",
+        {
+          "cameraPermission": "정상적인 바코드 인식 기능을 위해 $(PRODUCT_NAME)의 카메라 권한을 허용해 주십시오."  
+        }
+      ]
+    ]
+  }
+}
